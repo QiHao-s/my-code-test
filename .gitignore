@@ -1,0 +1,15 @@
+# 1. 忽略 C/C++ 编译生成的 exe 文件
+*.exe
+*.o
+*.out
+
+# 2. 忽略 Python 运行产生的缓存文件夹（非常重要）
+__pycache__/
+*.pyc
+
+# 3. 忽略 VS Code 自己的本地配置（有些配置因人而异，没必要传）
+.vscode/
+
+# 4. 忽略系统自动生成的隐藏文件
+.DS_Store
+Thumbs.db
