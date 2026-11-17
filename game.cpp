@@ -4,32 +4,51 @@
 
 using namespace std;
 
-int main() {
-    // 设置随机数种子，保证每次运行生成的数字都不一样
+void playGame() {
     srand(time(0)); 
-    int target = rand() % 100 + 1; // 生成 1-100 的随机数
+    int target = rand() % 1000 + 1; 
     int guess;
     int tries = 0;
+    int max_tries = 10; // 给10次机会
 
+    system("cls"); // 清空屏幕，保持界面干净
     cout << "==================================" << endl;
-    cout << "  欢迎来到猜数字游戏！" << endl;
-    cout << "  我已经想好了一个 1-100 之间的数字。" << endl;
+    cout << "      Welcome to Guessing Game 2.0!" << endl;
+    cout << "  I have picked a number between 1 and 1000." << endl;
+    cout << "  You have " << max_tries << " tries." << endl;
     cout << "==================================" << endl;
 
-    do {
-        cout << "\n请输入你猜的数字: ";
+    while (tries < max_tries) {
+        cout << "\n[Try " << tries + 1 << "/" << max_tries << "] Enter your guess: ";
         cin >> guess;
         tries++;
 
-        if (guess > target) {
-            cout << "📉 太大了！再往下猜猜。" << endl;
-        } else if (guess < target) {
-            cout << "📈 太小了！再往上猜猜。" << endl;
+        if (guess == target) {
+            cout << "\n*** Congratulations! You got it in " << tries << " tries. ***" << endl;
+            return; // 猜对了，直接结束这个函数
+        } else if (guess > target) {
+            cout << "Too high! Try a smaller number." << endl;
         } else {
-            cout << "\n🎉 恭喜你，猜对了！" << endl;
-            cout << "你一共猜了 " << tries << " 次。" << endl;
+            cout << "Too low! Try a larger number." << endl;
         }
-    } while (guess != target);
+    }
 
+    // 如果 while 循环结束还没 return，说明次数用光了
+    cout << "\n--- Out of tries! The correct number was: " << target << " ---" << endl;
+}
+
+int main() {
+    char playAgain;
+    
+    // 这是一个无限循环，直到玩家选择 'n'
+    do {
+        playGame(); // 呼叫上面的游戏函数
+
+        cout << "\nDo you want to play again? (y/n): ";
+        cin >> playAgain;
+        
+    } while (playAgain == 'y' || playAgain == 'Y');
+
+    cout << "\nThanks for playing. Goodbye!" << endl;
     return 0;
 }
